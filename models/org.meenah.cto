@@ -1,0 +1,75 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Write your model definitions here
+ */
+
+
+namespace org.meenah
+
+
+participant NpopcOfficial identified by npopcofficialId {
+  o String npopcofficialId
+  o String firstName
+  o String lastName
+  o String emailAddress
+  o String branch
+}
+
+participant HospitalOfficial identified by hospitalofficialId {
+  o String hospitalofficialId
+  o String firstName
+  o String lastName
+  o String emailAddress
+  o String branch
+  o String hospitalName
+}
+
+participant Citizen identified by citizenId {
+  o String citizenId
+  o String firstName
+  o String lastName
+  o String emailAddress
+  o String relationship
+}
+
+asset Certificate identified by certificateId {
+  o String certificateId 
+  o String birthdate
+  o String childName
+  o String fatherName
+  o String motherName
+  o DateTime registrationDate
+  --> Citizen citizen
+  --> HospitalOfficial hospitalofficial
+  --> NpopcOfficial npopcofficial
+}
+
+transaction RegisterBaby {
+  o String uniquecode
+  o String birthdate
+  o String childName
+  o String fatherName
+  o String motherName
+  o DateTime registrationDate
+  --> Citizen citizen
+  --> HospitalOfficial hospitalofficial
+  --> NpopcOfficial npopcofficial
+  --> Certificate certificate
+}
+
+transaction ViewBirthCertificate {
+ -->Certificate certificate
+}
